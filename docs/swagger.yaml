@@ -1,0 +1,293 @@
+basePath: /
+definitions:
+  web.OpdCreateRequest:
+    properties:
+      alamat:
+        type: string
+      email:
+        type: string
+      fax:
+        type: string
+      kode_opd:
+        type: string
+      nama_kepala_opd:
+        type: string
+      nama_opd:
+        type: string
+      nip_kepala_opd:
+        type: string
+      pangkat_kepala:
+        type: string
+      singkatan:
+        type: string
+      telepon:
+        type: string
+      website:
+        type: string
+    required:
+    - alamat
+    - kode_opd
+    - nama_kepala_opd
+    - nama_opd
+    - nip_kepala_opd
+    - singkatan
+    type: object
+  web.OpdUpdateRequest:
+    description: Update Request OPD
+    properties:
+      alamat:
+        type: string
+      email:
+        type: string
+      fax:
+        type: string
+      id:
+        type: string
+      kode_opd:
+        type: string
+      nama_kepala_opd:
+        type: string
+      nama_opd:
+        type: string
+      nip_kepala_opd:
+        type: string
+      pangkat_kepala:
+        type: string
+      singkatan:
+        type: string
+      telepon:
+        type: string
+      website:
+        type: string
+    required:
+    - alamat
+    - kode_opd
+    - nama_kepala_opd
+    - nama_opd
+    - nip_kepala_opd
+    - singkatan
+    type: object
+  web.WebResponse:
+    description: Web Response
+    properties:
+      code:
+        type: integer
+      data: {}
+      status:
+        type: string
+    type: object
+host: localhost:8002
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: API For Master Operasional Daerah Services
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Operasional Daerah Service API
+  version: "1.0"
+paths:
+  /opd/create:
+    post:
+      consumes:
+      - application/json
+      description: Create a new opd
+      parameters:
+      - description: Create Opd
+        in: body
+        name: opd
+        required: true
+        schema:
+          $ref: '#/definitions/web.OpdCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+      summary: Create Opd
+      tags:
+      - Opd
+  /opd/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete an existing opd
+      parameters:
+      - description: Opd ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+      summary: Delete Opd
+      tags:
+      - Opd
+  /opd/detail/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Find By Id an existing opd
+      parameters:
+      - description: Opd ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+      summary: FindById opd
+      tags:
+      - Opd
+  /opd/findall:
+    get:
+      consumes:
+      - application/json
+      description: FindAll an existing opd
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+      summary: FindAll opd
+      tags:
+      - Opd
+  /opd/findallopd:
+    get:
+      consumes:
+      - application/json
+      description: Find all only opd for dropdown
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+      summary: Find all only opd
+      tags:
+      - Opd
+  /opd/findbyopd/{kode_opd}:
+    get:
+      consumes:
+      - application/json
+      description: FindByKodeOpd an existing opd
+      parameters:
+      - description: Kode OPD
+        in: path
+        name: kode_opd
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+      summary: FindByKodeOpd opd
+      tags:
+      - Opd
+  /opd/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: Update an existing opd
+      parameters:
+      - description: Opd ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update Opd
+        in: body
+        name: opd
+        required: true
+        schema:
+          $ref: '#/definitions/web.OpdUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/web.WebResponse'
+      summary: Update Opd
+      tags:
+      - Opd
+schemes:
+- http
+swagger: "2.0"
