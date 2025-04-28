@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"opdServices/app"
 	_ "opdServices/docs"
 	"opdServices/helper"
 	"os"
@@ -30,13 +31,14 @@ func NewServer(e *echo.Echo) *echo.Echo {
 // @schemes http
 
 func main() {
+
+	app.RunFlyway()
+
 	server := InitializedServer()
 	host := os.Getenv("host")
 	port := os.Getenv("port")
 
 	addr := fmt.Sprintf("%s:%s", host, port)
-	//kedepannya gunakan jwt rs256
-	// server.Use(middleware.AuthMiddleware)
 
 	err := server.Start(addr)
 	helper.PanicIfError(err)
