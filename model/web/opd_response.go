@@ -14,8 +14,8 @@ type OpdResponse struct {
 	NipKepalaOpd  string `json:"nip_kepala_opd"`
 	NamaKepalaOpd string `json:"nama_kepala_opd"`
 	PangkatKepala string `json:"pangkat_kepala"`
-	CreatedAt     string `json:"created_at"`
-	UpdatedAt     string `json:"updated_at"`
+	CreatedAt     string `json:"created_at,omitempty"`
+	UpdatedAt     string `json:"updated_at,omitempty"`
 }
 
 type OpdOnlyResponse struct {

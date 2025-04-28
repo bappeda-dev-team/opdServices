@@ -4,30 +4,19 @@
 ### Kebutuhan
 
 - Go versi 1.23.0
-- MySQL versi 8.0.33
-- [golang-migrate](https://github.com/golang-migrate/migrate)
+- PostgreSQL 16
+- java 17
+- Flyway
 
 
 ### Cara install
 
+- download flyway dan pastikan java versi lebih dari 17
+```sh
+brew install flyway
+```
+
 - buat database bernama db_opd
-
-- install golang-migrate di cmd
-
-```sh
-go install -tags 'mysql' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
-```
-
-- add create migration
-``` sh
-migrate create -ext sql -dir db create_new_table
-```
-
-- migrasi database
-
-```sh
-migrate -path db -database "mysql://root@tcp(localhost:3306)/db_opd" up
-```
 
 - add echo framework
 ```sh
@@ -80,3 +69,9 @@ go get -d github.com/swaggo/swag/cmd/swag
 go get -u github.com/swaggo/echo-swagger
 ```
 
+###Maintenance Database
+- Untuk menambahkan table,buat file di folder db/migrations dan gunakan format yg ditentukan flyway
+```sh
+V1__create_table_a
+V2__create_table_b
+```
