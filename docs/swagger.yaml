@@ -42,7 +42,7 @@ definitions:
       fax:
         type: string
       id:
-        type: string
+        type: integer
       kode_opd:
         type: string
       nama_kepala_opd:
@@ -119,7 +119,7 @@ paths:
             $ref: '#/definitions/web.WebResponse'
       summary: Create Opd
       tags:
-      - Opd
+      - CREATE Opd
   /opd/delete/{id}:
     delete:
       consumes:
@@ -148,7 +148,7 @@ paths:
             $ref: '#/definitions/web.WebResponse'
       summary: Delete Opd
       tags:
-      - Opd
+      - DELETE Opd
   /opd/detail/{id}:
     get:
       consumes:
@@ -177,7 +177,7 @@ paths:
             $ref: '#/definitions/web.WebResponse'
       summary: FindById opd
       tags:
-      - Opd
+      - GET Opd
   /opd/findall:
     get:
       consumes:
@@ -200,7 +200,7 @@ paths:
             $ref: '#/definitions/web.WebResponse'
       summary: FindAll opd
       tags:
-      - Opd
+      - GET Opd
   /opd/findallopd:
     get:
       consumes:
@@ -223,7 +223,7 @@ paths:
             $ref: '#/definitions/web.WebResponse'
       summary: Find all only opd
       tags:
-      - Opd
+      - GET Opd
   /opd/findbyopd/{kode_opd}:
     get:
       consumes:
@@ -252,7 +252,7 @@ paths:
             $ref: '#/definitions/web.WebResponse'
       summary: FindByKodeOpd opd
       tags:
-      - Opd
+      - GET Opd
   /opd/update/{id}:
     put:
       consumes:
@@ -287,7 +287,7 @@ paths:
             $ref: '#/definitions/web.WebResponse'
       summary: Update Opd
       tags:
-      - Opd
+      - UPDATE Opd
 schemes:
 - http
 swagger: "2.0"

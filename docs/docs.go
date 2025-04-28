@@ -34,7 +34,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Opd"
+                    "CREATE Opd"
                 ],
                 "summary": "Create Opd",
                 "parameters": [
@@ -80,7 +80,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Opd"
+                    "DELETE Opd"
                 ],
                 "summary": "Delete Opd",
                 "parameters": [
@@ -124,7 +124,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Opd"
+                    "GET Opd"
                 ],
                 "summary": "FindById opd",
                 "parameters": [
@@ -168,7 +168,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Opd"
+                    "GET Opd"
                 ],
                 "summary": "FindAll opd",
                 "responses": {
@@ -203,7 +203,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Opd"
+                    "GET Opd"
                 ],
                 "summary": "Find all only opd",
                 "responses": {
@@ -238,7 +238,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Opd"
+                    "GET Opd"
                 ],
                 "summary": "FindByKodeOpd opd",
                 "parameters": [
@@ -282,7 +282,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Opd"
+                    "UPDATE Opd"
                 ],
                 "summary": "Update Opd",
                 "parameters": [
@@ -395,7 +395,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "id": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "kode_opd": {
                     "type": "string"

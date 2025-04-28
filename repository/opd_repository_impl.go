@@ -52,7 +52,7 @@ func (repository *OpdRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, i
 }
 
 func (repository *OpdRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) ([]domain.Opd, error) {
-	script := "SELECT id, nama_opd, kode_opd, singkatan, alamat, telepon, fax, email, website, nip_kepala_opd, nama_kepala_opd, pangkat_kepala FROM tb_operasional_daerah WHERE deleted_at IS NULL"
+	script := "SELECT id, nama_opd, kode_opd, singkatan, alamat, telepon, fax, email, website, nip_kepala_opd, nama_kepala_opd, pangkat_kepala, created_at, updated_at FROM tb_operasional_daerah WHERE deleted_at IS NULL"
 	rows, err := tx.QueryContext(ctx, script)
 	helper.PanicIfError(err)
 	defer rows.Close()
@@ -60,7 +60,7 @@ func (repository *OpdRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) ([
 	opds := []domain.Opd{}
 	for rows.Next() {
 		opd := domain.Opd{}
-		err = rows.Scan(&opd.Id, &opd.NamaOpd, &opd.KodeOpd, &opd.Singkatan, &opd.Alamat, &opd.Telepon, &opd.Fax, &opd.Email, &opd.Website, &opd.NipKepalaOpd, &opd.NamaKepalaOpd, &opd.PangkatKepala)
+		err = rows.Scan(&opd.Id, &opd.NamaOpd, &opd.KodeOpd, &opd.Singkatan, &opd.Alamat, &opd.Telepon, &opd.Fax, &opd.Email, &opd.Website, &opd.NipKepalaOpd, &opd.NamaKepalaOpd, &opd.PangkatKepala, &opd.CreatedAt, &opd.UpdatedAt)
 		helper.PanicIfError(err)
 		opds = append(opds, opd)
 	}

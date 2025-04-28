@@ -1,5 +1,5 @@
 CREATE TABLE tb_operasional_daerah (
-    id VARCHAR(255) PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     nama_opd VARCHAR(255) NOT NULL,
     kode_opd VARCHAR(255) NOT NULL,
     singkatan VARCHAR(255) NOT NULL,

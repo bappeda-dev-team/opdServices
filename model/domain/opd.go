@@ -1,7 +1,7 @@
 package domain
 
 type Opd struct {
-	Id            string
+	Id            int
 	NamaOpd       string
 	KodeOpd       string
 	Singkatan     string
@@ -13,4 +13,6 @@ type Opd struct {
 	NipKepalaOpd  string
 	NamaKepalaOpd string
 	PangkatKepala string
+	CreatedAt     string
+	UpdatedAt     string
 }

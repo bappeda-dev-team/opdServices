@@ -2,9 +2,9 @@ package web
 
 // @Description Update Request OPD
 type OpdUpdateRequest struct {
-	Id            string `json:"id" `
+	Id            int    `json:"id" `
 	NamaOpd       string `json:"nama_opd" validate:"required"`
-	KodeOpd       string `json:"kode_opd" validate:"required"`
+	KodeOpd       string `json:"kode_opd" validate:"required,numeric,len=18"`
 	Singkatan     string `json:"singkatan" validate:"required"`
 	Alamat        string `json:"alamat" validate:"required"`
 	Telepon       string `json:"telepon"`

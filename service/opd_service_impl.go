@@ -4,14 +4,14 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
+	"math/rand"
 	"opdServices/helper"
 	"opdServices/model/domain"
 	"opdServices/model/web"
 	"opdServices/repository"
-	"time"
+	"regexp"
 
 	"github.com/go-playground/validator/v10"
-	"github.com/google/uuid"
 )
 
 type OpdServiceImpl struct {
@@ -40,14 +40,23 @@ func (service *OpdServiceImpl) Create(ctx context.Context, request web.OpdCreate
 	}
 	defer helper.CommitOrRollback(tx)
 
-	ts := time.Now().Format("060102150405")
-	currentYear := time.Now().Year()
-	u := uuid.New()
-	randomPart := u.String()[0:6]
-	id := fmt.Sprintf("OPD-%v-%v-%v", currentYear, ts, randomPart)
+	if request.KodeOpd == "" {
+		return web.OpdResponse{}, fmt.Errorf("kode OPD wajib terisi")
+	}
+
+	regex := `^\d\.\d{2}\.\d\.\d{2}\.\d\.\d{2}\.\d{2}\.\d{4}$`
+	matched, err := regexp.MatchString(regex, request.KodeOpd)
+	if err != nil {
+		return web.OpdResponse{}, fmt.Errorf("error validasi format kode: %v", err)
+	}
+	if !matched {
+		return web.OpdResponse{}, fmt.Errorf("format kode tidak valid")
+	}
+
+	idRandom := rand.Intn(100000)
 
 	opd, err := service.opdRepository.Create(ctx, tx, domain.Opd{
-		Id:            id,
+		Id:            idRandom,
 		NamaOpd:       request.NamaOpd,
 		KodeOpd:       request.KodeOpd,
 		Singkatan:     request.Singkatan,
@@ -65,7 +74,6 @@ func (service *OpdServiceImpl) Create(ctx context.Context, request web.OpdCreate
 	}
 
 	return web.OpdResponse{
-		Id:            opd.Id,
 		NamaOpd:       opd.NamaOpd,
 		KodeOpd:       opd.KodeOpd,
 		Singkatan:     opd.Singkatan,
@@ -92,8 +100,20 @@ func (service *OpdServiceImpl) Update(ctx context.Context, request web.OpdUpdate
 	}
 	defer helper.CommitOrRollback(tx)
 
+	if request.KodeOpd == "" {
+		return web.OpdResponse{}, fmt.Errorf("kode OPD wajib terisi")
+	}
+
+	regex := `^\d\.\d{2}\.\d\.\d{2}\.\d\.\d{2}\.\d{2}\.\d{4}$`
+	matched, err := regexp.MatchString(regex, request.KodeOpd)
+	if err != nil {
+		return web.OpdResponse{}, fmt.Errorf("error validasi format kode: %v", err)
+	}
+	if !matched {
+		return web.OpdResponse{}, fmt.Errorf("format kode tidak valid")
+	}
+
 	opd := service.opdRepository.Update(ctx, tx, domain.Opd{
-		Id:            request.Id,
 		NamaOpd:       request.NamaOpd,
 		KodeOpd:       request.KodeOpd,
 		Singkatan:     request.Singkatan,
@@ -193,6 +213,8 @@ func (service *OpdServiceImpl) FindAll(ctx context.Context) ([]web.OpdResponse, 
 			NipKepalaOpd:  opd.NipKepalaOpd,
 			NamaKepalaOpd: opd.NamaKepalaOpd,
 			PangkatKepala: opd.PangkatKepala,
+			CreatedAt:     opd.CreatedAt,
+			UpdatedAt:     opd.UpdatedAt,
 		})
 	}
 

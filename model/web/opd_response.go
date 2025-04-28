@@ -2,7 +2,7 @@ package web
 
 // @Description Response OPD
 type OpdResponse struct {
-	Id            string `json:"id"`
+	Id            int    `json:"id,omitempty"`
 	KodeOpd       string `json:"kode_opd"`
 	NamaOpd       string `json:"nama_opd"`
 	Singkatan     string `json:"singkatan"`
@@ -14,6 +14,8 @@ type OpdResponse struct {
 	NipKepalaOpd  string `json:"nip_kepala_opd"`
 	NamaKepalaOpd string `json:"nama_kepala_opd"`
 	PangkatKepala string `json:"pangkat_kepala"`
+	CreatedAt     string `json:"created_at"`
+	UpdatedAt     string `json:"updated_at"`
 }
 
 type OpdOnlyResponse struct {

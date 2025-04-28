@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"opdServices/model/web"
 	"opdServices/service"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 )
@@ -19,7 +20,7 @@ func NewOpdControllerImpl(opdService service.OpdService) *OpdControllerImpl {
 // Create godoc
 // @Summary Create Opd
 // @Description Create a new opd
-// @Tags Opd
+// @Tags CREATE Opd
 // @Accept json
 // @Produce json
 // @Param opd body web.OpdCreateRequest true "Create Opd"
@@ -39,7 +40,7 @@ func (controller *OpdControllerImpl) Create(c echo.Context) error {
 			http.StatusInternalServerError,
 			web.WebResponse{
 				Code:   http.StatusInternalServerError,
-				Status: "Failed Create 	OPD",
+				Status: "Failed Create OPD",
 				Data:   err.Error(),
 			},
 		)
@@ -55,7 +56,7 @@ func (controller *OpdControllerImpl) Create(c echo.Context) error {
 // Update godoc
 // @Summary Update Opd
 // @Description Update an existing opd
-// @Tags Opd
+// @Tags UPDATE Opd
 // @Accept json
 // @Produce json
 // @Param id path string true "Opd ID"
@@ -70,8 +71,15 @@ func (controller *OpdControllerImpl) Update(c echo.Context) error {
 		return err
 	}
 
-	id := c.Param("id")
-
+	idStr := c.Param("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, web.WebResponse{
+			Code:   http.StatusBadRequest,
+			Status: "Invalid ID",
+			Data:   err.Error(),
+		})
+	}
 	OpdUpdateRequest.Id = id
 
 	opdResponse, err := controller.opdService.Update(c.Request().Context(), OpdUpdateRequest)
@@ -96,7 +104,7 @@ func (controller *OpdControllerImpl) Update(c echo.Context) error {
 // Delete godoc
 // @Summary Delete Opd
 // @Description Delete an existing opd
-// @Tags Opd
+// @Tags DELETE Opd
 // @Accept json
 // @Produce json
 // @Param id path string true "Opd ID"
@@ -129,7 +137,7 @@ func (controller *OpdControllerImpl) Delete(c echo.Context) error {
 // FindById godoc
 // @Summary FindById opd
 // @Description Find By Id an existing opd
-// @Tags Opd
+// @Tags GET Opd
 // @Accept json
 // @Produce json
 // @Param id path string true "Opd ID"
@@ -161,7 +169,7 @@ func (controller *OpdControllerImpl) FindById(c echo.Context) error {
 // FindAll godoc
 // @Summary FindAll opd
 // @Description FindAll an existing opd
-// @Tags Opd
+// @Tags GET Opd
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.WebResponse
@@ -191,7 +199,7 @@ func (controller *OpdControllerImpl) FindAll(c echo.Context) error {
 // FindAllOnlyOpd godoc
 // @Summary Find all only opd
 // @Description Find all only opd for dropdown
-// @Tags Opd
+// @Tags GET Opd
 // @Accept json
 // @Produce json
 // @Success 200 {object} web.WebResponse
@@ -220,7 +228,7 @@ func (controller *OpdControllerImpl) FindAllOnlyOpd(c echo.Context) error {
 
 // @Summary FindByKodeOpd opd
 // @Description FindByKodeOpd an existing opd
-// @Tags Opd
+// @Tags GET Opd
 // @Accept json
 // @Produce json
 // @Param kode_opd path string true "Kode OPD"
